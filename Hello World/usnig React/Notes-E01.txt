@@ -1,0 +1,24 @@
+Refer to App.js for better understanding
+
+- "THE OBJECT" is used to pass attributes to the element being created. eg: { color: "red", id: "heading" }
+
+- React.createElement gives us a JS object, i.e. heading is nothing more than a normal JS object.
+
+- The third arguement to createElement can also be a React.createElement if we want to create a nested tag structure
+   eg: React.createElement("div", {id: "parent"}, React.createElement("div", {id: "child"}, React.createElement("h1", {}, "I am H1"))) to form a structure like below:
+    <div id= "parent">
+        <div id= "child">
+            <h1>"I am H1"</h1>
+        </div>
+    </div>
+
+- If we want to create siblings in a nested tag structure we write them in array in third arguement
+   eg: React.createElement("div", {id: "parent"}, React.createElement("div", {id: "child"}, [React.createElement("h1", {}, "I am H1"), React.createElement("h2", {}, "I am H2")])) to form a structure like below:
+    <div id= "parent">
+        <div id= "child">
+            <h1>"I am H1"</h1>
+            <h2>"I am H2"</h2>
+        </div>
+    </div>
+
+- Render Method replaces all previous tags in the root with new arguement, It doesn't append.
