@@ -1,0 +1,17 @@
+- Run npm init to add package.json to our project.
+
+- To add any new dependency in a npm using project we run command npm install <package name> or npm install -D <package name> , the -D here is for dev dependencies.
+
+- We can also write npm i <package name>, it works perfectly as well.
+
+- We don't push node_modules folder to git or production as it is bulky and unnecessary to store.
+
+- By running npm install command we can regenrate our node_modules folder as long as we have our package file 
+
+- Instead of clicking on our file and loading it from folders into browser we can host our app on local server with the help of parser, we only need to run the command "npx parcel index.html" to have a dev build; To get a prod build we use the command "npx parcel build index.html".
+
+- Mostly npx is used to execute a module/package.
+
+- Parcel does a lot more things then just bundling or hosting, read about them in detail on "https://parceljs.org"
+
+- We can set the browser compatibility of our app by writing configuration for browserslist array in package.json, for more info visit "https://browserslist.dev"
