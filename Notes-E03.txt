@@ -1,0 +1,20 @@
+- Instead of writing complete command to run/build our project we can write kinda alias in our package.json.
+  In package.json file we have an object named scripts, in it we write the keyword and then the command in key value pairs. eg: "start": "parcel index.html", so after writing this in scripts instead of writing command "npx parcel index.html" we can use "npm run start".
+
+- start is a reserved keyword in npm hence just for start we can also write the command "npm run start" as "npm start" and it will work exactly the same (No other key/alias would work without start).
+
+- JSX is Javascript syntax to write React easily; React can be written without JSX as well.
+
+- JSX is not HTML written in Javascript.
+
+- JSX is TRANSPILED by bundler (parcel/ webpack) used by us before it reaches the JS engine so that browsers/ JSengines can understand JSX as JSX in itself is not pure JS hence won't be understood by browsers. { TRANSPILED = Converting one higher level language to another higher level language as per our requirement }
+
+- Our Bundler itself is not responsible for transpiling JSX, it uses a package called BABEL. In general BABEL is a JS compiler.
+
+- BABEL can transpile our JSX to react element, it also transpiles our ES6/ES7 etc code to lower ESversion on old browser versions like ES4/ES5; read more about BABEL them on "https://babeljs.io"
+
+- COMPONENT COMPOSITION = Using a react component inside of another react component.
+
+- We can write any piece of JS code inside our JSX by just using {}. eg: <h2>{ console.log('Hello!') }<h2/>
+
+- JSX (React) by itself sanitizes all variables/ data we send in our component ( within {} ) in order to keep our code safe from malicious attacks like Cross Site Scripting (XSS) from happening. Read more about how React handles XSS here : "https://www.stackhawk.com/blog/react-xss-guide-examples-and-prevention/#:~:text=If%20you%20check%20now%2C%20the,a%20DOM%2Dbased%20XSS%20attack"
