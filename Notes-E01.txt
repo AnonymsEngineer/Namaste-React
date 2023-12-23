@@ -1,4 +1,6 @@
-Refer to App.js for better understanding
+REACT is a JS library NOT Framework.
+
+Refer to App.js (Hello world using React) for better understanding
 
 - "THE OBJECT" is used to pass attributes to the element being created. eg: { color: "red", id: "heading" }
 
