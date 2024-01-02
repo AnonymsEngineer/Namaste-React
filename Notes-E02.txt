@@ -12,6 +12,10 @@
 
 - Mostly npx is used to execute a module/package.
 
-- Parcel does a lot more things then just bundling or hosting, read about them in detail on "https://parceljs.org"
+- Parcel does a lot more things then just bundling or hosting, read about them in detail on "https://parceljs.org", also checkout "https://webpack.js.org/" Webpack is also a bundler similar to parcel.
+
+- Parcel helps in caching, image optimisation, bundling, compressing, minification, build local server, HMR (Hot Module Replacement) etc.
+
+- Whenever we make a build in local, parcel caches the build and save that in '.parcel-cache' folder and then in subsequent builds the time taken is reduced drastically.
 
 - We can set the browser compatibility of our app by writing configuration for browserslist array in package.json, for more info visit "https://browserslist.dev"
