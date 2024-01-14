@@ -9,9 +9,9 @@
 
 - JSX is TRANSPILED by bundler (parcel/ webpack) used by us before it reaches the JS engine so that browsers/ JSengines can understand JSX as JSX in itself is not pure JS hence won't be understood by browsers. { TRANSPILED = Converting one higher level language to another higher level language as per our requirement }
 
-- Our Bundler itself is not responsible for transpiling JSX, it uses a package called BABEL. In general BABEL is a JS compiler.
+- Our Bundler itself is NOT responsible for transpiling JSX, it uses a package called BABEL. In general BABEL is a JS compiler.
 
-- BABEL can transpile our JSX to react element, it also transpiles our ES6/ES7 etc code to lower ESversion on old browser versions like ES4/ES5; read more about BABEL them on "https://babeljs.io"
+- BABEL can transpile our JSX to react element, it also transpiles our ES6/ES7 etc code to lower ESversion on old browser versions like ES4/ES5; read more about BABEL on "https://babeljs.io"
 
 - COMPONENT COMPOSITION = Using a react component inside of another react component.
 
