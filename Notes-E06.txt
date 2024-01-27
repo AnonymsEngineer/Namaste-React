@@ -1,0 +1,9 @@
+- Read about 'Sepration of Concern' and 'Single Responsibility Principle' related to microservices.
+
+- Until the page is rendered and all data is loaded what we think is we should put a loading spinner which looks good, but according to industry standards it is not acceptable instead we should use Shimmer.
+
+- Shimmer UI is like loading a fake page (which looks similar to our apge just shadows) until the real component and data is loaded. 
+
+- whenever we use input box in our component (eg: search box) we should use state variable to save and update the value entered in the input box. This looks good but it leads to re-rendering of component on every key press in the input box.
+Code eg ->  const [searchText, setSearchText] = useState("");
+            <input type="text" value={searchText} onChange={(e) => {setSearchText(e.target.value)}} />
