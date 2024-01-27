@@ -11,6 +11,6 @@
 Q. Why React throws warning to pass key in when we are looping a component (multiple occurances)?
 Ans. When we have components at same level react optimizes it's render cycles by removing all the components in the container and re-render all of them; Instead if we have UNIQUE key/id assigned to each repeating comeponent react will be able to identify the changes and will render only the new changes/ newly added components rather than re-rendering all of them.  Eg : food cards on swiggy site; if key is not passed then whenever new card is added all cards will re-render but by passing UNIQUE key react can detect the change and only render the new card.
 
-- For mapping keys/ unique id with our component we may think of using Index of the loop but that is a BAD practice and even React offical docs recommend not to do so. Read more about it on - ""
+- For mapping keys/ unique id with our component we may think of using Index of the loop but that is a BAD practice and even React offical docs recommend not to do so. Read more about it on - "https://react.dev/learn/rendering-lists#rules-of-keys"
 
 -> UNIQUE key >>>>>>> uning Index as key >>>> not using key in component.

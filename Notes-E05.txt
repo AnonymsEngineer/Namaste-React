@@ -1,0 +1,13 @@
+- When we write default import, we can put any name we want after import. Eg: we could write import Banana from './Button.js' instead and it would still provide us with the same default export (Button). In contrast, with named imports, the name has to match on both sides. That’s why they are called NAMED imports!
+
+- People often use default exports if the file exports only one component, and use named exports if it exports multiple components and values.
+
+- Keeping hard-coded constant values in the code is considered a bad practice; Instead what we can do is we make a constant.js/ config.js or utils.js file and keep all those in it and use it in the project by importing from there.
+
+- React (and other frameworks) are trying to keep UI layer and data layer in sync i.e. keeping the UI updated with the data we get; this is achieved via quick manupulation of DOM and virtual DOM.
+
+- React Hook is just a normal JS function written for us to use directly. Most used react hooks are useState() and useEffect().
+
+- useState is used to create state variables in our react components.
+
+- Read more about React Fiber at "https://github.com/acdlite/react-fiber-architecture".
