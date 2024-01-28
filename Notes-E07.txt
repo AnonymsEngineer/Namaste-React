@@ -1,0 +1,73 @@
+- In useEffect hook we can have different cases resulting into different number of times it being invoked; they are:
+    - If no dependency array is there -> useEffect is called on every component render.
+    - If dependency array is [] (empty) -> useEffect is called on intial render only (just once).
+    - If dependency array have some dependency -> useEffect is called on intial render and then everytime the dependency gets updated.
+
+- Never call useState hook outside of the component and never call it inside if/else or loops or any functions present in component; Always call useState at the start in the component.
+
+- For routing purposes in our project we use react-router-dom npm package. We use createBrowserRouter (most common function) to create routes.
+
+- Syntax: 
+            const appRouter = createBrowserRouter([
+            {
+                path: "/",
+                element: <AppLayout />,
+                errorElement: <Error />,
+            },
+            {
+                path: "/about",
+                element: <About />,
+            },
+            ]);
+
+        - path defines the location where we will visit; which component to render goes into element; errorElement key stores the error page which is rendered when user tries to access invalid path.
+
+- createBrowserRouter is not the only router, there are several options to choose from. Read more about it from "https://reactrouter.com/en/main".
+
+- to render our appRouter in our project we need another function from react-router-dom which is "RouterProvider"
+
+- Syntax:  
+            root.render(<RouterProvider router={appRouter} />);
+        - we pass our routes configuration (appRouter) into router prop of RouteProvider.
+
+- Additional to these react-router-dom provides us a hook named as "useRouteError", this hook contains a lot of information related to routing error which we can use in our error handling page (Displaying useful error message for proper debugging).
+
+- In order to load specific components while re-routing instead of rendering complete page we use something known as "Outlet". This is also from "react-router-dom" library.
+
+- What we do is we write <Outlet /> as placeholder component where we want to render the routed element.
+eg Syntax:  
+            const AppLayout = () => {
+            return (
+                    <div className="app">
+                        <Header />
+                        <Outlet />    -> placeholder where routed element will be rendered.
+                    </div>
+                );
+            };
+
+            const appRouter = createBrowserRouter([
+            {
+                path: "/",
+                element: <AppLayout />,
+                children: [
+                {
+                    path: "/",
+                    element: <Body />,
+                },
+                {
+                    path: "/about",
+                    element: <About />,
+                },
+                {
+                    path: "/contact",
+                    element: <Contact />,
+                },
+                ],
+                errorElement: <Error />,
+            },
+            ]);
+
+        - Instead of directly giving path at start now we have "children routing". children also take same configuration as earlier, it just allows us to render components in place of <Outlet /> .
+
+- Instead of using anchor tag (<a href="route to go">click</a>) we use <Link /> component from "react-router-dom".
+Syntax: <Link to="route to go">click</Link>. (Reason in notebook notes)
