@@ -71,3 +71,14 @@ eg Syntax:
 
 - Instead of using anchor tag (<a href="route to go">click</a>) we use <Link /> component from "react-router-dom".
 Syntax: <Link to="route to go">click</Link>. (Reason in notebook notes)
+
+- There are two types of routing in web applications:
+        - Client side routing = No network call is made. eg: when we do routing with Link component.
+        - Server side routing = Network call is made and webpage is fetched for route to be dispalyed. eg: when we do routing with anchor tag <a />.
+
+- Instead of static routing we can do dynamic routing as well.
+    Syntax eg:  path: "/contact" -> static routing
+                path: "/restaurant/:resId" -> dynamic routing ( the colon is used to signify dynamic value like resId in this case)
+    
+- useParams hook from "react-router-dom" can be used to get params (similar to paramters in a function call) values passed from the parent (component from which the child component is invoked). 
+    Syntax: const { destructure params here } = useParams();
