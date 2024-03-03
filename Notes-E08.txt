@@ -1,0 +1,153 @@
+// React Class Based Components
+
+Q. Difference in extends React.Component and extends Component while making a Class Based Component?
+Ans - *No major difference*, the difference is just how we imported. When we do import { Component } from 'react', we are importing Component from react library (internally which is React.Component) and using it like "class Name extends Component" while if we do import React from 'react', we use "class Name extends React.Component".
+
+
+Q. Why render method used in class based components? How it works? Is it mandatory? what if I return something before render method or outside render method?
+Ans. Why the render method is used:
+        - It separates the component's logic (state, lifecycle methods) from its presentation (visual output). This makes the code more organized and easier to maintain.
+        - The render method describes what the component should look like based on its state and props, promoting a declarative coding style.
+
+    How the render method works :
+        - The render method gets called automatically whenever the component's state changes (using this.setState) or the component receives new props.
+        - The render method returns JSX code, which describes the component's structure and content.
+        - When the render method is called, React creates a virtual DOM. It then compares this virtual DOM with the previously rendered real DOM. Based on this comparison, React determines the most efficient way to update the real DOM.
+
+    In the context of class based components in React, YES, the render method is mandatory.
+
+    If we return before or outside render method this is possible behaviour of code:
+        - Any code or values returned outside the render method will be ignored during the component's lifecycle. The render method serves as the sole designated location for returning the JSX code that defines the component's UI.
+        - If we attempt to perform essential UI-related logic or data manipulation outside the render method, it won't be reflected in the final rendered output. This could lead to unexpected behavior or an empty component being rendered.
+
+
+Q. what is a constructor in class based components? what is super keyword? why is it mandatory to use super keyword in constructor?
+Ans. The constructor is a special method that is invoked only once when a component is first initialized. It serves two primary purposes:
+        - Initializing State using this.state property (not strictly mandatory)
+        - Binding Event Handlers (Optional): In class-based components, if we define event handler methods directly inside the component class, the constructor can be used to bind these methods to the component instance. This ensures that the this keyword within the event handler refers to the correct component instance when the event is triggered.
+        eg: class MyComponent extends React.Component {
+            constructor(props) {
+                super(props);
+                this.handleClick = this.handleClick.bind(this); // Binding the event handler
+                }
+
+                handleClick() {
+                    // This method now has access to "this.state" and "this.props"
+                }
+
+                render() {
+                    return (
+                        // component to return 
+                    );
+                }
+        }
+
+    NOTE: Binding event handlers in the constructor is only necessary if you're using traditional function expressions (not arrow functions) for defining event handlers within the component class. Arrow functions automatically bind the this context, eliminating the need for explicit binding.
+
+    super(props) in class based component:
+        - The super keyword acts as a bridge between your component and its parent class inheritance hierarchy.It serves two crucial purposes:
+            1. When we define a constructor within our component class, using super(props) at the beginning explicitly calls the constructor of the parent class (React.Component). This call is essential because it initializes the base class's state and binds its lifecycle methods to the component instance. Without it, our component might not function as expected and could encounter issues related to state management or lifecycle methods.
+            2. The super keyword can also be used within other methods of our class component to access properties or methods defined on the parent class. In most React class components, we inherit functionalities and properties from the base class React.Component.
+
+    Defining a constructor method is optional to initialize the component's state. However, calling super(props) within the constructor is mandatory. Using super(props) is mandatory for two reasons:
+        - It ensures that the base class's constructor is called, which is responsible for setting up essential functionalities like state management and lifecycle methods. Omitting this call would leave these aspects uninitialized, potentially leading to unexpected behavior.
+        - The super(props) call plays a role in binding the component instance (this) to the lifecycle methods defined in the parent class. This binding ensures that the this keyword within those methods refers to the correct component instance, allowing them to access and manipulate the component's state and props effectively.
+
+
+Q. Can hooks be used in class based components?
+Ans. No, hooks cannot be directly used within class-based components in React. Hooks were introduced specifically for functional components to provide a way to "hook into" React features like state and lifecycle methods which are there in class based components.
+
+
+- Visit 'https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram' to see react lifecycle diagram.
+
+
+Q. What is componentDidMount? What are its usecases?
+Ans. componentDidMount is a lifecycle method for class based components. It's invoked immediately after a component is mounted (inserted into the DOM tree). This makes it a suitable place for tasks that require interaction with the DOM, data fetching, or subscriptions.
+    - It's called only once after the initial render of the component.
+    - It occurs after the component has been rendered in the DOM and has access to the DOM elements.
+    - We can use componentDidMount to fetch data from an API or external source.
+    - If our component needs to establish subscriptions to external data sources or events (eg. WebSockets, timers), we canuse componentDidMount to set them up. However, remember to clean up these subscriptions in the componentWillUnmount lifecycle method to avoid memory leaks.
+
+
+Q. What is componentDidUpdate? What are its usecases?
+Ans. componentDidUpdate is another lifecycle method for class based components. It's invoked immediately after the component updates due to changes in its props, state, or contextual factors (e.g., context API updates). This makes it a suitable place to react to these changes and perform actions accordingly.
+    - It's called after a component has been updated and re-rendered in the DOM.
+    - It's called every time the component updates, not just once like componentDidMount.
+    - If our component needs to fetch data based on changes in its props, we can utilize componentDidUpdate to compare the previous props (received through the second argument) with the current props and trigger data fetching only when they differ. This optimizes performance by avoiding unnecessary data requests.
+    - We can use componentDidUpdate along with conditional logic to trigger specific actions based on changes in state or props. For example, we might update a third-party library or perform side effects only when specific conditions are met.
+    - If our component relies on external state management solutions (eg. Redux) we can use componentDidUpdate to update the component's local state according to changes in the external store.
+
+*NOTE: Be mindful of potential infinite loops when using componentDidUpdate for state updates. Ensure your logic avoids triggering updates that lead back to the same state, causing a continuous loop.
+
+
+Q. What is componentWillUnmount? What are its usecases?
+Ans. componentWillUnmount is another lifecycle method for class based components. It's invoked immediately before a component is unmounted (removed from the DOM tree). This makes it a vital place to perform any necessary cleanup tasks before the component is destroyed.
+    - It's called just before a component is removed from the DOM and is never called again for the same instance.
+    - It's the last opportunity to perform actions before the component is destroyed.
+    - If our component has established subscriptions to external data sources or events (eg. WebSockets, timers) in componentDidMount or elsewhere, we use componentWillUnmount to clean up these subscriptions. This ensures our component doesn't leak resources or memory after it's unmounted.
+    - If our component uses setInterval or setTimeout to set up timers or delays, we clear them within componentWillUnmount to prevent them from running even after the component is no longer present. (*IMPORTANT)
+
+
+Q. why API calls made only in componentDidMount lifecycle method?
+Ans. By placing the API call in componentDidMount, we guarantee that the data is fetched after the component has been rendered initially. This ensures that the UI doesn't attempt to display data that might not be available yet, leading to potential errors or incomplete rendering.
+If we place the API call within the render method or other lifecycle methods that trigger re-renders, the component might re-render multiple times while the data is being fetched, which can lead to performance issues and unnecessary overhead. componentDidMount is called only once after initial render, avoiding this problem.
+    - This is what flow looks like: First constructor is called, then render is called and after initial render componentDidMount is called.
+
+
+
+- lifecycle of Class based components in different scenarios: 
+    1. If parent component is class based and child component is function based or viceversa in these cases only one has lifecylces concept hence it will have its independent lifecycle without interfering with other ones flow.
+    2. IF both parent and child components are class based then this is the flow:
+        - Parent constructor
+        - Parent render
+        - Child constructor
+        - Child render
+        - Child componentDidMount
+        - Parent componentDidMount
+
+
+Q. How life cycle of component works in case of multiple children in a parent? 
+Ans. If more than one child components are there in parent component and all of them are class based then this is the flow:
+        - Parent constructor            |
+        - Parent render                 |
+        - First Child constructor       | -----> Render Phase
+        - First Child render            |
+        - Second Child constructor      |
+        - Second Child render           |
+
+        - First Child componentDidMount     |
+        - Second Child componentDidMount    | -----> Commit Phase
+        - Parent componentDidMount          |
+
+
+Q. What render phase, commit phase and batching?
+Ans. Render Phase: 
+        - The render phase does not directly manipulate the DOM, but rather creates the VDOM (Virtual DOM), which is a more efficient representation for comparison and optimization.
+     Commit Phase:
+        - The commit phase is responsible for optimally updating the actual DOM based on the differences identified between the previous and new VDOM.
+     Batching:  (*IMPORTANT)
+        - In above flow, Before completing first child componentDidMount in flow it moves to the second child which may feel weird at first but if we search for answers we get to know that react does someting called Batching. Batching is an optimization technique introduced in React 16 in which react batches the render and commit phases for multiple child components together. 
+        - By grouping updates for multiple components, React can potentially minimize the number of times it interacts with the DOM, leading to smoother rendering and better user experience.
+    
+
+*NOTE: Never compare react lifecycle methods in class based, to hooks or anything else in function based. In modern react they removed the concept of lifecylce methods.
+
+
+Q. How to implement all lifecycle methods using useEffect in Functional components?
+Ans. In modern react lifecycle methods concept is removed yet we need to implement those functionalities. We try to get those using hooks in react.
+    1. componentDidMount (function invoke on initial render) - This can be done by giving empty dependency array in useEffect ie.  
+        - useEffect(() => {
+            // Fetch data or perform actions after component mounts
+        }, []);
+
+    2. componentDidUpdate (function invoked on each re-render due to changes in props, state, etc) - This can be done by giving the prop in dependency array in useEffect ie.
+        - useEffect(() => {
+            // Perform actions based on changes in props, state, etc
+        }, [prop]);
+
+    3. componentWillUnmount (function invoke right before a component unmounts) - This can be done by having a return in our useEffect with an empty dependency array ie. 
+        - useEffect(() => {
+            return () => {
+                // Cleanup function: clear subscriptions, timers, or event listeners
+            };
+        }, []); // Empty dependency array ensures cleanup happens only once
