@@ -1,0 +1,128 @@
+Q. What are SOLID principles?
+Ans. The SOLID principles are a set of five design principles to promote the creation of object-oriented, well-structured, and maintainable software. These principles can be applied to other paradigms, including functional programming used in React.
+
+    1. Single Responsibility Principle (SRP):
+    - Concept: A class or component should have one and only one reason to change. This means its functionality should be focused and well-defined, avoiding the need for modifications due to unrelated concerns.
+    - React Application: In React, this translates to components having a single, well-defined purpose. A component should be responsible for rendering a specific part of the UI and managing its own state. Avoid creating components that do too much or become a dumping ground for unrelated functionalities.
+    
+    2. Open/Closed Principle (OCP):
+    - Concept: Software entities (classes, modules, etc.) should be open for extension but closed for modification. This means we should be able to extend the functionality of a component without modifying its existing code.
+    - React Application: In React, achieve this by using composition (combining smaller components) and props (passing data down the component tree) to extend functionality. This allows us to create new components that leverage existing ones without altering their source code.
+    
+    3. Liskov Substitution Principle (LSP):
+    - Concept: If we have a base class (or interface) and a derived class, objects of the derived class should be usable wherever objects of the base class are expected. In other words, derived classes should be substitutable for their base classes without introducing errors or unexpected behavior.
+    - React Application: While React doesn't have inheritance in the traditional sense, this principle can be applied to custom hooks. If we have a custom hook that performs a specific action, ensure that any derivative hooks built upon it maintain the expected behavior and don't introduce unintended side effects. 
+    - Easy Interpretation: Ek component ko similar dusre component se replace krdo to unki overall functionalities mein problem nhi aani chahiye.
+    
+    4. Interface Segregation Principle (ISP):
+    - Concept: Classes should not be forced to depend on methods they do not use. This means interfaces should be specific and focused, avoiding including methods that are not relevant to certain classes.
+    - React Application: In React, this principle can be applied to props. Avoid passing unnecessary props down the component tree. Instead, consider creating smaller, more focused components that only receive the props they truly need. 
+    - Easy Interpretation: Different requirements ke liye different props ke sath multiple components bana lo instead of passing unuseful props to same components, internally ye ek tarah se LSP ko bhi promote kr rha.
+
+    5. Dependency Inversion Principle (DIP):
+    - Concept: High-level modules should not depend on low-level modules. Both should depend on abstractions. Abstractions should not depend on details. Details should depend on abstractions. This principle emphasizes decoupling high-level components from low-level implementation details.
+    - React Application: In React, this can be achieved by using dependency injection or context API. Instead of directly importing and using concrete implementations of services or data access layers, rely on abstractions or interfaces that can be injected or provided by the parent component or a higher-level provider.
+    - Easy Interpretation: Instead of button component depending on a specific way of getting data (like from a certain API), it's better to have a more general way of getting data (like a "data provider") that many components can use. This way, if the way of getting data changes, we only need to fix the "data provider" and not all the button components.
+
+Q. What is ACID principle?
+Ans. The ACID principle is a set of four properties that ensure data integrity in transactions within a database management system (DBMS). By enforcing these principles, database systems ensure reliable and accurate data storage, crucial for many applications that rely on accurate information.
+
+    - Atomicity: This guarantees that a transaction is treated as a single unit of work. Either all the changes within the transaction happen successfully, or none of them do. It's like building a Lego tower: either we finish the entire tower or none of it gets built.
+    
+    - Consistency: This ensures that the database transitions from one valid state to another valid state after a successful transaction. Think of it like rearranging our toys: after we're done, our room might look different, but it's still tidy and organized.
+    
+    - Isolation: This property isolates concurrent transactions from each other, meaning changes made in one transaction don't affect another transaction happening at the same time. Imagine two friends building separate Lego models: their actions shouldn't mess up each other's creations.
+    
+    - Durability: This guarantees that once a transaction is committed (marked as successful), the changes made are permanent and will persist even in case of system failures like power outages or crashes. It's like putting our finished Lego creations on a shelf: they'll stay there even if the lights go out for a moment.
+
+Q. What is DRY principle?
+Ans. DRY stands for Don't Repeat ourself. It's a principle in software development that encourages us to avoid writing the same code multiple times. Benefits of DRY - Saves time, Reduces errors, Makes code easier to understand.
+
+Q. What is KISS principle?
+Ans. KISS stands for Keep It Simple, Stupid. It's a principle in software development that encourages creating things that are easy to understand and use.
+
+Q. What is modularity in coding?
+Ans. Modularity in coding refers to the practice of breaking down a large program into smaller, independent, and reusable pieces called modules. These modules often referred to as functions, classes, or components (in the context of React) encapsulate specific functionalities within our code.
+
+Q. What are linters?
+Ans. - Linters are automated tools used in coding to identify and report potential errors, stylistic inconsistencies, and suspicious coding practices in our source code. 
+    - They act as a first line of defense, helping developers catch issues early in the development process before they lead to bugs or security vulnerabilities.
+    - Unlike debuggers that analyze code execution at runtime, linters perform static code analysis. They examine the code itself without actually running it.
+    - Linters come with built-in rule sets or allow us to configure custom rules. These rules cover various aspects like syntax errors, variable naming conventions, code formatting, potential performance bottlenecks, or security risks.
+    - One such linter is ESLint, which is a widely used and highly configurable linter specifically designed for JavaScript and TypeScript code.
+
+Q. What is online/offline window event listener in JS?
+Ans. In JavaScript, online/offline window event listeners are used to detect and respond to changes in the browser's network connection state. Specifically, they listen for the online event emitted by the window object.
+    - The online event fires whenever the browser establishes or loses connection to the internet.
+    - The value of the "navigator.onLine" property also changes to true when online and false when offline.
+
+    eg: window.addEventListener('online', () => {
+            console.log('Browser is now online!');
+        });
+
+        window.addEventListener('offline', () => {
+            console.log('Browser is now offline!');
+        });
+
+    NOTE:-
+    - The online event only reflects the browser's connection status. It doesn't guarantee that specific websites or resources are accessible.
+    - The offline event is not explicitly supported in all browsers, but it can be inferred from the negative state of navigator.onLine.
+    - For more advanced network connectivity detection and control, consider browser APIs like the Network Information API or Service Workers.
+
+Q. What is chunking, code splitting, dynamic bundling, lazy loading, ondemand loading, dynamic import?
+Ans. In React, all these terms are related to how we manage and load our application's code. Here's a breakdown of each term in the context of React:
+
+    1. Chunking:
+    - Concept: Chunking refers to the practice of dividing our React application code into smaller, more manageable pieces. These chunks can be based on features, components, or any logical grouping that makes sense for our application's structure.
+
+    2. Code Splitting:
+    - Concept: Code splitting is a technique that leverages chunking to load specific parts of our application code only when they are needed. This reduces the initial load time of our application, improving performance for users with slow internet connections.
+    
+    3. Dynamic Bundling:
+    - Concept: Dynamic bundling is a specific implementation of code splitting where the bundler (like Webpack) can dynamically generate code bundles at build time based on our code structure and configuration.
+
+    4. Lazy Loading:
+    - Concept: Lazy loading is a technique within code splitting that focuses on loading code on-demand at runtime, often triggered by user interaction or route changes. It's a specific way to achieve code splitting.
+
+    5. On-demand Loading:
+    - Concept: On-demand loading is a broader term that encompasses both code splitting and lazy loading. It refers to the general idea of loading code only when it's required by the user's interaction or the current application state.
+
+    6. Dynamic Import:
+    - Concept: Dynamic import is a JavaScript syntax (import()) that allows us to import modules or components at runtime. It's a core concept used in lazy loading.
+
+
+EASY EXPLAINATION -> Imagine we're building a giant Lego castle! But the box comes with way too many bricks – so many we can barely lift it! That's kind of like a big, bulky computer program.
+
+    - "Chunking" is like sorting all the Lego bricks into smaller boxes. we might have a box for walls, another for towers, and one for decorations. This makes it easier to find the pieces we need and build things faster.
+
+    - "Code Splitting" is like only taking the Lego boxes we need to build a specific part of the castle. we wouldn't carry all the boxes around if we're just building a wall, right?
+
+    - "Dynamic Bundling" - Imagine we have a super helpful friend who builds Lego castles all the time. They know exactly which bricks we need for different parts (walls, towers, etc.) based on our instructions. So, instead of sorting the giant Lego box ourself, our friend creates smaller boxes with the specific bricks we need for each part even before we start building!
+
+    - "Lazy Loading" is like grabbing a specific Lego box from another room only when we need it. Maybe we start building the wall, then realize we need the decorations box.
+
+    - "On-demand Loading" is like using all these ideas together to make building the castle as smooth as possible. we have the bricks sorted (chunking), only take the ones we need at first (code splitting), and grab extras only when needed (lazy loading).
+
+    - "Dynamic Importing" - Imagine we're building the castle and suddenly realize we need a special kind of brick, like a curved one for a fancy archway. we don't have that specific brick in any of our sorted boxes. But our friend knows exactly where to find it and can quickly grab it from a special storage room.
+
+Q. What are lazy and suspense component from react?
+Ans. In React, the lazy function and the Suspense component work together to implement lazy loading for our components. Here's a breakdown of what each does:
+
+    1. Lazy (React.lazy) - React.lazy allows us to define a component as lazy loaded. This means the code for that component isn't downloaded immediately when our app loads.
+
+    2. Suspense - We wrap our lazy-loaded component with the Suspense component. This tells React to show the fallback element (like a spinning circle) until the lazy-loaded component's code is downloaded and ready to be used.
+
+    Eg: 
+        const MyLazyComponent = React.lazy(() => import('./MyLazyComponent'));
+        
+        function App() {
+            return (
+                <div>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <MyLazyComponent />
+                </Suspense>
+                </div>
+            );
+        }
+
+- In order to keep our component with single responsibility (displaying data/ component on UI) we need to do other operations (like making api calls or fetching data) in different functions. When those functions are written elsewhere (mostly in utils folder) and used multiple times in different components, we say that function is a "Custom Hook".
